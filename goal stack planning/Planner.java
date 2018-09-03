@@ -32,13 +32,12 @@ Scanner sc = new Scanner(System.in);
 	public void input()
 	{
 
-		/*System.out.println("Enter Start State");
-		start = sc.next();
-		current = start;
 		System.out.println("Enter Start State");
-		goal = sc.next();*/
-		start = "ontable(a)^ontable(c)^on(a,b)^clear(a)^clear(c)^armempty";
-		goal = "clear(a)^ontable(c)^on(a,b)^on(b,c)^armempty";		
+		start = sc.next();
+		System.out.println("Enter Goal State");
+		goal = sc.next();
+		// start = "ontable(a)^ontable(c)^on(a,b)^clear(a)^clear(c)^armempty";
+		// goal = "clear(a)^ontable(c)^on(a,b)^on(b,c)^armempty";		
 	};
 		
 	public void set_initial()
