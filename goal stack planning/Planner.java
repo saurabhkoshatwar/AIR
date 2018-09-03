@@ -1,5 +1,7 @@
 import java.util.*;
 
+import javax.lang.model.util.ElementScanner6;
+
 class Planner
 {
 int k;
@@ -32,13 +34,12 @@ Scanner sc = new Scanner(System.in);
 	public void input()
 	{
 
-		/*System.out.println("Enter Start State");
-		start = sc.next();
-		current = start;
 		System.out.println("Enter Start State");
-		goal = sc.next();*/
-		start = "ontable(a)^ontable(c)^on(b,a)^clear(b)^clear(c)^armempty";
-		goal = "clear(a)^ontable(c)^on(a,b)^on(b,c)^armempty";		
+		start = sc.next();
+		System.out.println("Enter Goal State");
+		goal = sc.next();
+		// start = "ontable(a)^ontable(c)^on(b,a)^clear(b)^clear(c)^armempty";
+		// goal = "clear(a)^ontable(c)^on(a,b)^on(b,c)^armempty";		
 	};
 		
 	public void set_initial()
@@ -113,7 +114,7 @@ Scanner sc = new Scanner(System.in);
 			{
 				return true;
 			}
-			else if(state.contains("holding") && holding==state.charAt(8)%97)
+			else if(state.contains("holding") && holding==state.charAt(8))
 			{
 				return true;
 			}
@@ -172,9 +173,11 @@ Scanner sc = new Scanner(System.in);
 
 				if(ontable[action.charAt(8)%97] == 1)
 				{
+					
 					goalstack.push("pickup("+action.charAt(8)+")");
 					
 					//preconditions
+					
 					goalstack.push("ontable("+action.charAt(8)+")");
 					goalstack.push("armempty");
 				}
@@ -247,7 +250,7 @@ Scanner sc = new Scanner(System.in);
 			{
 				//add
 				armempty = 1;
-				ontable[action.charAt(8)%97] = 0;
+				ontable[action.charAt(8)%97] = 1;
 				
 				//delete
 				holding = 0;
@@ -283,11 +286,12 @@ Scanner sc = new Scanner(System.in);
 
 		while(!goalstack.isEmpty())
 		{
-			//System.out.println();
-			//System.out.println(goalstack.clone());
+			System.out.println();
+			print();
+			System.out.println(goalstack.clone());
 
 			current = goalstack.pop();
-			//System.out.println(check(current));
+			System.out.println(current);
 			if(current.contains("stack") || current.contains("unstack")  || current.contains("pickup") || current.contains("putdown") )
 			{
 				postAction(current);
@@ -306,9 +310,11 @@ Scanner sc = new Scanner(System.in);
 					}
 				}
 				else{
+					goalstack.push(current);
 					preAction(current);
 				}
 			}
+
 
 
 
