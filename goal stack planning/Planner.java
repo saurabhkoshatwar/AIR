@@ -67,20 +67,22 @@ Scanner sc = new Scanner(System.in);
 			}
 			
 		}
+
+
 	}	
 	
 	public boolean check(String state)
 	{	
 		if(state.contains("^"))
 		{
-			System.out.println();
-			System.out.println(state);	
+			//System.out.println();
+			//System.out.println(state);	
 			String simple_state[] = state.split("['^']");
 			
 			for(int i=0;i<simple_state.length;i++)
 			{
 				
-				System.out.println(simple_state[i]);
+				//System.out.println(simple_state[i]);
 				if(!check_simple(simple_state[i]))
 				{
 					return false;
@@ -153,23 +155,46 @@ Scanner sc = new Scanner(System.in);
 						break;
 					}
 				}
-
+					
+				
 				goalstack.push("unstack("+alphabet[i]+","+action.charAt(6)+")");
 				
 				//preconditions
 				goalstack.push("on("+alphabet[i]+","+action.charAt(6)+")");
-				goalstack.push("clear("+action.charAt(i)+")");
+				goalstack.push("clear("+alphabet[i]+")");
 				goalstack.push("armempty");
 
 				
 			}
 			else if(action.contains("holding"))
 			{
-				goalstack.push("pickup("+action.charAt(8)+")");
+
+				if(ontable[action.charAt(8)%97] == 1)
+				{
+					goalstack.push("pickup("+action.charAt(8)+")");
+					
+					//preconditions
+					goalstack.push("ontable("+action.charAt(8)+")");
+					goalstack.push("armempty");
+				}
+				else
+				{
+					int i;
+					for( i = 0;i<k;i++)
+					{
+						if(on[action.charAt(8)%97][i]==1)
+						{
+							break;
+						}
+					}
+					
+					goalstack.push("unstack("+action.charAt(8)+","+alphabet[i]+")");
 				
-				//preconditions
-				goalstack.push("ontable("+action.charAt(8)+")");
-				goalstack.push("armempty");
+					//preconditions
+					goalstack.push("on("+action.charAt(8)+","+alphabet[i]+")");
+					goalstack.push("clear("+action.charAt(8)+")");
+					goalstack.push("armempty");
+				}
 
 			}
 			else if(action.contains("armempty"))
@@ -184,18 +209,8 @@ Scanner sc = new Scanner(System.in);
 
 	public void postAction(String action)
 	{
-		if(action.contains("stack"))
-			{
-				//add
-				armempty = 1;
-				on[action.charAt(6)%97][action.charAt(8)%97] = 1;
-				clear[action.charAt(6)%97] = 1;
-				
-				//delete
-				clear[action.charAt(8)%97] = 0;
-				holding= 0;
-			}
-			else if(action.contains("unstack"))
+
+			if(action.contains("unstack"))
 			{
 				//add
 				holding = action.charAt(8);
@@ -205,6 +220,17 @@ Scanner sc = new Scanner(System.in);
 				armempty = 0;
 				on[action.charAt(8)%97][action.charAt(10)%97] = 0;
 
+			}
+			else if(action.contains("stack"))
+			{
+				//add
+				armempty = 1;
+				on[action.charAt(6)%97][action.charAt(8)%97] = 1;
+				clear[action.charAt(6)%97] = 1;
+				
+				//delete
+				clear[action.charAt(8)%97] = 0;
+				holding= 0;
 			}
 			else if(action.contains("pickup"))
 			{
@@ -228,6 +254,25 @@ Scanner sc = new Scanner(System.in);
 			}
 
 	}
+	
+	public void print()
+	{
+			for(int q=0;q<k;q++)
+			{
+				System.out.println();
+				for(int j=0;j<k;j++)
+				{
+					System.out.print(on[q][j]+" ");
+				}
+			}
+			
+			System.out.println();
+			System.out.println();
+			for(int j=0;j<k;j++)
+			{
+				System.out.print(ontable[j]+" ");
+			}
+	}
 
 	public void plan()
 	{
@@ -237,8 +282,8 @@ Scanner sc = new Scanner(System.in);
 
 		while(!goalstack.isEmpty())
 		{
-			System.out.println();
-			System.out.println(goalstack.clone());
+			//System.out.println();
+			//System.out.println(goalstack.clone());
 
 			current = goalstack.pop();
 			//System.out.println(check(current));
@@ -273,8 +318,9 @@ Scanner sc = new Scanner(System.in);
 	}
 
 	public void dispAction()
-	{
-		System.out.println("Actions:");
+	{	
+		
+		System.out.println("\nActions:");
 		for(int i=0;i<actions.size();i++)
 		{
 			System.out.println(actions.get(i));
