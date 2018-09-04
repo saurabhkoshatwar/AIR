@@ -34,12 +34,15 @@ Scanner sc = new Scanner(System.in);
 	public void input()
 	{
 
-		System.out.println("Enter Start State");
+		/*System.out.println("Enter Start State");
 		start = sc.next();
 		System.out.println("Enter Goal State");
-		goal = sc.next();
+		goal = sc.next();*/
 		// start = "ontable(a)^ontable(c)^on(b,a)^clear(b)^clear(c)^armempty";
-		// goal = "clear(a)^ontable(c)^on(a,b)^on(b,c)^armempty";		
+		// goal = "clear(a)^ontable(c)^on(a,b)^on(b,c)^armempty";
+
+		start = "ontable(b)^ontable(c)^on(d,b)^on(a,c)^clear(d)^clear(a)^armempty";	
+		goal =  "ontable(a)^on(b,a)^on(c,b)^on(d,c)^clear(d)^armempty";	
 	};
 		
 	public void set_initial()
@@ -143,8 +146,8 @@ Scanner sc = new Scanner(System.in);
 				goalstack.push("stack("+action.charAt(3)+","+action.charAt(5)+")");
 				
 				//preconditions
-				goalstack.push("clear("+action.charAt(5)+")");
-				goalstack.push("holding("+action.charAt(3)+")");
+				goalstack.push("clear("+action.charAt(5)+")^"+"holding("+action.charAt(3)+")");
+				//goalstack.push("holding("+action.charAt(3)+")");
 
 			}
 			else if(action.contains("clear"))
@@ -162,9 +165,9 @@ Scanner sc = new Scanner(System.in);
 				goalstack.push("unstack("+alphabet[i]+","+action.charAt(6)+")");
 				
 				//preconditions
-				goalstack.push("on("+alphabet[i]+","+action.charAt(6)+")");
-				goalstack.push("clear("+alphabet[i]+")");
-				goalstack.push("armempty");
+				goalstack.push("on("+alphabet[i]+","+action.charAt(6)+")^"+"clear("+alphabet[i]+")^armempty");
+				//goalstack.push("clear("+alphabet[i]+")");
+				//goalstack.push("armempty");
 
 				
 			}
@@ -178,8 +181,8 @@ Scanner sc = new Scanner(System.in);
 					
 					//preconditions
 					
-					goalstack.push("ontable("+action.charAt(8)+")");
-					goalstack.push("armempty");
+					goalstack.push("ontable("+action.charAt(8)+")^"+"clear("+action.charAt(8)+")^armempty");
+					//goalstack.push("armempty");
 				}
 				else
 				{
@@ -195,9 +198,9 @@ Scanner sc = new Scanner(System.in);
 					goalstack.push("unstack("+action.charAt(8)+","+alphabet[i]+")");
 				
 					//preconditions
-					goalstack.push("on("+action.charAt(8)+","+alphabet[i]+")");
-					goalstack.push("clear("+action.charAt(8)+")");
-					goalstack.push("armempty");
+					goalstack.push("on("+action.charAt(8)+","+alphabet[i]+")^"+"clear("+action.charAt(8)+")^armempty");
+					//goalstack.push("clear("+action.charAt(8)+")");
+					//goalstack.push("armempty");
 				}
 
 			}
@@ -286,12 +289,12 @@ Scanner sc = new Scanner(System.in);
 
 		while(!goalstack.isEmpty())
 		{
-			System.out.println();
-			print();
-			System.out.println(goalstack.clone());
+			//System.out.println();
+			//print();
+			//System.out.println(goalstack.clone());
 
 			current = goalstack.pop();
-			System.out.println(current);
+			//System.out.println(current);
 			if(current.contains("stack") || current.contains("unstack")  || current.contains("pickup") || current.contains("putdown") )
 			{
 				postAction(current);
