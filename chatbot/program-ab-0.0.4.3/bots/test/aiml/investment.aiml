@@ -64,13 +64,17 @@
 </category>	
 
 <category>
-	<pattern>* Suggestion * investment *</pattern>
+	<pattern>* Suggestion * investment</pattern>
+	
 	<template>
 		<random>
-			<li>Mutual Funds: <srai>What are Mutual Funds</srai></li>
-			<li>Equities: <srai>What are Equities</srai></li>
+		<li>Invest in Mutual Funds</li>
+		<li>Invest in Gold</li>
+		<li>Invest in  Direct Equities</li>
+		<li>Invest in  PPF</li>
 		</random>
 	</template>
+	
 </category>	
 
 

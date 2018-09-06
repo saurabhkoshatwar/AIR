@@ -1,8 +1,0 @@
-0,HELLO,*,*,Hello User! I am Jarviz,investment.aiml
-0,I AM *,*,*,Hello <star/>#Comma I am Jarviz,investment.aiml
-0,WHAT ARE MUTUAL FUNDS,*,*,Mutual Funds an investment programme funded by shareholders that trades in diversified holdings and is professionally managed.,investment.aiml
-0,WHAT ARE EQUITIES,*,*,Equities the value of the shares issued by a company.,investment.aiml
-0,DO U KNOW WHAT ARE *,*,*,<srai> What are <star/> </srai>,investment.aiml
-0,INVESTMENT,*,*,Investment is the action or process of investing money for profit.,investment.aiml
-0,* WHAT * INVESTMENT,*,*,<srai>Investment</srai>,investment.aiml
-0,* SUGGESTION * INVESTMENT *,*,*,<random>#Newline			<li>Mutual Funds: <srai>What are Mutual Funds</srai></li>#Newline			<li>Equities: <srai>What are Equities</srai></li>#Newline		</random>,investment.aiml
