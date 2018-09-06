@@ -1,0 +1,80 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<aiml>
+   <category>
+      <pattern> HELLO </pattern>
+      
+      <template>
+         Hello User! I am Jarviz
+      </template>
+      
+   </category>
+	
+
+	
+<category>
+	<pattern> I am *</pattern>
+
+	<template>
+		Hello <star/>, I am Jarviz
+	</template>
+	
+</category>
+
+
+
+
+<category>
+	<pattern>What are Mutual Funds</pattern>
+	<template>
+		Mutual Funds an investment programme funded by shareholders that trades in diversified holdings and is professionally managed.
+	</template>
+</category>
+
+<category>
+	<pattern>What are Equities</pattern>
+	<template>
+		Equities the value of the shares issued by a company.	
+	</template>
+</category>
+<category>
+	<pattern> Do u Know What are *</pattern>
+
+	<template>
+		<srai> What are <star/> </srai>
+	</template>
+</category>	
+
+
+
+<category>
+	<pattern>Investment</pattern>
+
+	<template>
+		Investment is the action or process of investing money for profit.
+	</template>
+	
+</category>
+
+<category>
+	<pattern>* What * Investment</pattern>
+
+	<template>
+		<srai>Investment</srai>
+	</template>
+</category>	
+
+<category>
+	<pattern>* Suggestion * investment *</pattern>
+	<template>
+		<random>
+			<li>Mutual Funds: <srai>What are Mutual Funds</srai></li>
+			<li>Equities: <srai>What are Equities</srai></li>
+		</random>
+	</template>
+</category>	
+
+
+
+
+</aiml>	
+	
